@@ -12,9 +12,7 @@ Node::Node(const Vector &pos) : m_shape(pos)
 Node::~Node()
 {
     for (Node *child : m_childs)
-    {
         delete child;
-    }
 }
 
 float Node::get_dist(const Vector &pos) const
@@ -23,18 +21,18 @@ float Node::get_dist(const Vector &pos) const
     return a.length();
 }
 
-float Node::get_angle(const Vector &pos) const
+inline float Node::get_angle(const Vector &pos) const
 {
     Vector a = pos - get_pos();
     return std::atan2(a.y, a.x) * 180 / PI;
 }
 
-Vector Node::get_pos() const
+inline Vector Node::get_pos() const
 {
     return m_shape.get_position();
 }
 
-Vector Node::get_direction(const Vector &point) const
+inline Vector Node::get_direction(const Vector &point) const
 {
     Vector dif = point - get_pos();
     return dif.normalize();
@@ -44,10 +42,13 @@ void Node::refactor_point(Vector &pos) const
 {
     Vector dif = pos - get_pos();
     auto length = dif.length();
-    if (length <= MAX_DIST)
-        return;
     Vector direction = dif.normalize();
-    pos = get_pos() + direction * MAX_DIST;
+
+    if (length < MIN_DIST)
+        pos = get_pos() + direction * MIN_DIST;
+
+    else if (length > MAX_DIST)
+        pos = get_pos() + direction * MAX_DIST;
 }
 
 void Node::draw(sf::RenderWindow &window)

@@ -5,6 +5,9 @@
 #include <rrt.hpp>
 #include <vector>
 
+#define WIDTH 1366
+#define HEIGHT 768
+
 struct WindowOptions
 {
     sf::Vector2u size;
@@ -14,7 +17,7 @@ struct WindowOptions
 class Application
 {
   private:
-    sf::RenderWindow m_window{sf::VideoMode(800, 600), "RRT Algorithm Visualization"};
+    sf::RenderWindow m_window{sf::VideoMode(WIDTH, HEIGHT), "RRT Algorithm Visualization"};
     std::vector<sf::Shape *> m_shapes;
     RRT *m_rrt = nullptr;
 
@@ -27,9 +30,7 @@ class Application
     void mainLoop();
     Application() = default;
     ~Application();
-    Application(const WindowOptions &w) : m_window{sf::VideoMode(w.size.x, w.size.y), w.title}
-    {
-    }
+    Application(const WindowOptions &w);
 
     Application(const uint width, const uint height, const std::string title)
         : m_window{sf::VideoMode(width, height), title}

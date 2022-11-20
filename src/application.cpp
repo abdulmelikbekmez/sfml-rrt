@@ -5,6 +5,10 @@
 #include <application.hpp>
 #include <iostream>
 
+Application::Application(const WindowOptions &w) : m_window{sf::VideoMode(w.size.x, w.size.y), w.title}
+{
+}
+
 void Application::mainLoop()
 {
 
@@ -50,6 +54,7 @@ void Application::m_handleEvent()
             float rad = 10.;
             auto shape = new sf::CircleShape(rad);
             shape->setPosition(ev.mouseButton.x - rad, ev.mouseButton.y - rad);
+            std::cout << "clicked position => " << ev.mouseButton.x << " " << ev.mouseButton.y << std::endl;
 
             m_shapes.push_back(shape);
             if (m_shapes.size() == 2)

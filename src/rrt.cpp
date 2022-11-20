@@ -1,8 +1,5 @@
-#include <cstdlib>
-#include <ctime>
-#include <queue>
+#include "application.hpp"
 #include <rrt.hpp>
-#include <thread>
 RRT::RRT(const Vector &start, const Vector &finish) : m_head(new Node(start)), m_finish(finish)
 {
     srand((unsigned)time(0));
@@ -15,8 +12,8 @@ RRT::~RRT()
 
 Vector RRT::m_generate_random_point() const
 {
-    auto x = rand() % 800;
-    auto y = rand() % 600;
+    auto x = rand() % WIDTH;
+    auto y = rand() % HEIGHT;
     return Vector(x, y);
 }
 
