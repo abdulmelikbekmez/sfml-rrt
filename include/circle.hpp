@@ -6,15 +6,16 @@
 
 class Circle : protected sf::CircleShape
 {
-  private:
-    Vector m_pos;
-
   public:
     Circle(float x, float y);
     Circle(const Vector &pos);
     void set_position(const Vector &pos);
     Vector get_position() const;
+    float get_radius() const;
     void draw(sf::RenderWindow &window) const;
+
+  private:
+    Vector m_pos;
 };
 
 #endif // !H_CIRCLE

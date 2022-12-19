@@ -17,8 +17,7 @@ Node::~Node()
 
 float Node::get_dist(const Vector &pos) const
 {
-    Vector a = pos - get_pos();
-    return a.length();
+    return ((Vector)(pos - get_pos())).length();
 }
 
 inline float Node::get_angle(const Vector &pos) const
@@ -30,6 +29,11 @@ inline float Node::get_angle(const Vector &pos) const
 inline Vector Node::get_pos() const
 {
     return m_shape.get_position();
+}
+
+inline float Node::get_radius() const
+{
+    return m_shape.get_radius();
 }
 
 inline Vector Node::get_direction(const Vector &point) const
@@ -60,7 +64,7 @@ void Node::draw(sf::RenderWindow &window)
         auto angle = get_angle(n->get_pos());
 
         sf::RectangleShape l{sf::Vector2f{dist, 1}};
-        l.setPosition(get_pos());
+        l.setPosition(get_pos() + Vector(n->get_radius(), n->get_radius()));
         l.setRotation(angle);
         n->draw(window);
         window.draw(l);

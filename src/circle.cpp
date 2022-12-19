@@ -25,6 +25,11 @@ Vector Circle::get_position() const
     return m_pos;
 }
 
+float Circle::get_radius() const
+{
+    return getRadius();
+}
+
 void Circle::draw(sf::RenderWindow &window) const
 {
     window.draw(*this);

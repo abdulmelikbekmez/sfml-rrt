@@ -22,6 +22,7 @@ class Node
     float get_dist(const Vector &pos) const;
     inline float get_angle(const Vector &pos) const;
     inline Vector get_pos() const;
+    inline float get_radius() const;
     inline Vector get_direction(const Vector &point) const;
 
     void refactor_point(Vector &pos) const;
