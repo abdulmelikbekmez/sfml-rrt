@@ -2,14 +2,15 @@ cmake_minimum_required(VERSION 3.19)
 
 project(cpp-sfml VERSION 1.0)
 
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release)
+
+find_package(SFML 2.5 
+  COMPONENTS 
+    system window graphics REQUIRED)
 
 include_directories(
     include
-    lib/SFML/include
 )
-
-link_directories(lib/SFML/lib)
 
 add_executable(
     ${PROJECT_NAME}

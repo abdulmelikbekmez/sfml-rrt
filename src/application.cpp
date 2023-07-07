@@ -4,6 +4,7 @@
 #include "rrt.hpp"
 #include <application.hpp>
 #include <iostream>
+#include <memory>
 
 Application::Application(const WindowOptions &w) : m_window{sf::VideoMode(w.size.x, w.size.y), w.title}
 {
@@ -25,13 +26,11 @@ void Application::mainLoop()
 
 Application::~Application()
 {
-    for (sf::Shape *c : m_shapes)
-        delete c;
 }
 
 void Application::m_draw()
 {
-    for (sf::Shape *c : m_shapes)
+    for (auto c : m_shapes)
         m_window.draw(*c);
 
     if (m_rrt != nullptr)
@@ -52,7 +51,7 @@ void Application::m_handleEvent()
         if (ev.type == sf::Event::MouseButtonPressed && ev.mouseButton.button == sf::Mouse::Left && m_rrt == nullptr)
         {
             float rad = 10.;
-            auto shape = new sf::CircleShape(rad);
+            auto shape = std::make_shared<sf::CircleShape>(rad);
             shape->setPosition(ev.mouseButton.x - rad, ev.mouseButton.y - rad);
             std::cout << "clicked position => " << ev.mouseButton.x << " " << ev.mouseButton.y << std::endl;
 
@@ -74,9 +73,6 @@ void Application::m_handleKeyPress()
     {
         delete m_rrt;
         m_rrt = nullptr;
-        for (auto x : m_shapes)
-            delete x;
-
         m_shapes.clear();
     }
 

@@ -2,6 +2,7 @@
 #define H_MAIN
 
 #include <SFML/Graphics.hpp>
+#include <memory>
 #include <rrt.hpp>
 #include <vector>
 
@@ -18,7 +19,7 @@ class Application
 {
   private:
     sf::RenderWindow m_window{sf::VideoMode(WIDTH, HEIGHT), "RRT Algorithm Visualization"};
-    std::vector<sf::Shape *> m_shapes;
+    std::vector<std::shared_ptr<sf::Shape>> m_shapes;
     RRT *m_rrt = nullptr;
 
     void m_handleEvent();
